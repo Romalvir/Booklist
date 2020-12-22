@@ -1,6 +1,6 @@
 // Book Class : represents a Book object
 class Book {
-	constructor(title,author,isbn){
+	constructor(title, author, isbn){
 		//assign it to the property using .this
 		this.title = title;
 		this.author = author;
@@ -51,7 +51,16 @@ class UI {
 
 		list.appendChild(row);
 	}
+
+	//This method will clear all the fields after being appended to the DOM
+	static clearFields(){
+		document.querySelector("#title").value = "";
+		document.querySelector("#author").value ="";
+		document.querySelector("#isbn").value ="";
+	}
 }
+
+
 
 // Class to handles storage
 
@@ -60,15 +69,31 @@ class UI {
 document.addEventListener("DOMContentLoaded", UI.displayBooks);
 
 //Event: Add a book, UI & local storage
-document.querySelector("book-form").addEventListener("submit", (e) => {
+document.querySelector("#book-form").addEventListener("submit", (e)=>{
+	//prevent paramter
+	e.preventDefault();
+//get form values
+	const title = document.querySelector("#title").value;
+	const author = document.querySelector("#author").value;
+	const isbn = document.querySelector("#isbn").value;
 
+	//Instantiate book object
+	const book = new Book(title, author, isbn);
+	
+	//Add book to UI
+	UI.addBookToList(book);
 
+	//Clear the Field
+	UI.clearFields();
 
 });
 
-
-
-
-
-
 //Event: To remove a book from UI & local storage
+
+
+
+
+
+
+
+
